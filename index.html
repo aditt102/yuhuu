@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>For You 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f1df;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: #f6f1df;
+      border-radius: 18px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 18px;
+    }
+
+    h1 {
+      font-size: 22px;
+      color: #6b4a2d;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 12px 26px;
+      border: none;
+      border-radius: 999px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #ff5c8d;
+      color: white;
+      transition: 0.2s ease;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .buttons {
+      position: relative;
+      height: 70px;
+      margin-top: 10px;
+    }
+
+    .buttons button {
+      position: absolute;
+      white-space: nowrap;
+    }
+
+    .yes {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .no {
+      background: #dcdcdc;
+      color: #555;
+      left: 0;
+      cursor: not-allowed;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1 -->
+  <div class="card" id="slide1">
+    <img src="1.jpg" alt="Slide 1">
+    <button onclick="next(1)">Next</button>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="card hidden" id="slide2">
+    <img src="2.jpg" alt="Slide 2">
+    <button onclick="next(2)">Next</button>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="card hidden" id="slide3">
+    <h1>kamu mau gak jadi pacar aku?</h1>
+
+    <div class="buttons">
+      <button class="yes" onclick="accept()">MAU 💖</button>
+      <button class="no" id="noBtn" disabled>ENGGA 🙃</button>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 (ENDING) -->
+  <div class="card hidden" id="slide4">
+    <h1>YEAY 🥹💖</h1>
+    <h1>aku seneng banget</h1>
+  </div>
+
+  <script>
+    function next(n) {
+      document.getElementById(`slide${n}`).classList.add('hidden');
+      document.getElementById(`slide${n + 1}`).classList.remove('hidden');
+    }
+
+    function accept() {
+      slide3.classList.add('hidden');
+      slide4.classList.remove('hidden');
+    }
+
+    // tombol ENGGA kabur
+    const noBtn = document.getElementById('noBtn');
+    const buttons = document.querySelector('.buttons');
+
+    noBtn.addEventListener('mouseover', () => {
+      const maxX = buttons.offsetWidth - noBtn.offsetWidth;
+      const maxY = buttons.offsetHeight - noBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    });
+  </script>
+
+</body>
+</html>
